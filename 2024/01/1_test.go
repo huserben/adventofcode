@@ -96,3 +96,26 @@ func TestSum(t *testing.T) {
 		})
 	}
 }
+
+func TestItemCount(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    []int
+		number   int
+		expected int
+	}{
+		{"None", []int{1, 2, 3, 4, 3}, 15, 0},
+		{"Once", []int{1, 2, 3, 4, 3}, 2, 1},
+		{"Twice", []int{1, 2, 3, 4, 3}, 3, 2},
+		{"Many", []int{1, 4, 3, 4, 4, 4, 23, 4}, 4, 5},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := CountNumber(tt.input, tt.number)
+			if got != tt.expected {
+				t.Errorf("CountNumber(%v) = %d; want %d", tt.input, got, tt.expected)
+			}
+		})
+	}
+}

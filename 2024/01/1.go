@@ -77,6 +77,30 @@ func ParseInputFile(fileName string) ([]int, []int) {
 	return column1, column2
 }
 
+func CountNumber(input []int, number int) int {
+	count := 0
+
+	for _, num := range input {
+		if num == number {
+			count++
+		}
+	}
+
+	return count
+}
+
+func CreateSimilarityScore(input1 []int, input2 []int) int {
+	similarityScore := 0
+
+	for _, number := range input1 {
+		muliplier := CountNumber(input2, number)
+
+		similarityScore += number * muliplier
+	}
+
+	return similarityScore
+}
+
 func main() {
 	list1, list2 := ParseInputFile("input.txt")
 
@@ -87,5 +111,9 @@ func main() {
 
 	sum := Sum(diff)
 
-	fmt.Printf("%v", sum)
+	fmt.Fprintln(os.Stdout, []any{"", sum}...)
+
+	fmt.Fprintln(os.Stdout, []any{"Creating Similarity Score"}...)
+	similarityScore := CreateSimilarityScore(list1, list2)
+	fmt.Fprintln(os.Stdout, []any{"Similarity Score is ", similarityScore}...)
 }
