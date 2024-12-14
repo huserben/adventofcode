@@ -1,12 +1,10 @@
 name: Go CI
 
 on:
-  push:
-    paths:
-      - '2024/**'
-  pull_request:
-    paths:
-      - '2024/**'
+    push:
+      paths:
+        - '2024/**'           
+        - '.github/workflows/**'
 
 jobs:
   go-ci:
