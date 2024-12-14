@@ -31,13 +31,16 @@ jobs:
           cd 2024
           go test ./...
 
-      - name: Build and run Go files
+      - name: Build and run Go files (excluding *_test.go)
         run: |
-          cd 2024
-          for dir in */ ; do
-            cd $dir
-            for file in *.go; do
-              go run "$file"
+            cd 2024
+            for dir in */ ; do
+                cd "$dir"
+                for file in *.go; do
+                # Skip *_test.go files
+                if [[ "$file" != *_test.go ]]; then
+                    go run "$file"
+                fi
+                done
+                cd ..
             done
-            cd ..
-          done
